@@ -1,11 +1,16 @@
 (function (window, document) {
 	'use strict';
-	function fillValue(el, value) {
+	function insert(el, value) {
 		document.getElementById(el).innerText = value;
 	}
 	
-	fillValue('user-agent', Utils.browser().getUserAgent());
-	fillValue('screen-resolution', Utils.browser().getResolution().size);
-	fillValue('browser', Utils.browser().getBrowser());
+	var browser = Utils.browser();
+
+	insert('user-agent', browser.getUserAgent());
+	insert('screen-resolution', browser.getResolution().size);
+	insert('browser', browser.getBrowser());
+	insert('version', 'full: ' + browser.getVersion().full + ' | major: ' + browser.getVersion().major);
+	insert('device', browser.getDevice());
+	insert('os', browser.getOS());
 
 })(this, document);
