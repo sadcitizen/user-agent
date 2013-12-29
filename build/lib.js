@@ -47,10 +47,10 @@
                     Safari: /webkit\W(?!.*chrome).*safari\W/i
                 },
                 engine: {
-                    gecko: /mozilla(?!.*webkit).*\Wgecko\W/i,
-                    webkit: /webkit\W/i,
-                    trident: /trident/i,
-                    presto: /presto/i
+                    Gecko: /mozilla(?!.*webkit).*\Wgecko\W/i,
+                    Webkit: /webkit\W/i,
+                    Trident: /trident/i,
+                    Presto: /presto/i
                 },
                 os: {
                     Windows: /windows/i,
@@ -60,8 +60,13 @@
                     Android: /android/i
                 },
                 device: {
-                    tablet: /(ipad|android(?!.*mobile))/i,
-                    mobile: /(iphone|ipod|((?:android)?.*?mobile)|blackberry|nokia)/i
+                    Tablet: /(ipad|android(?!.*mobile))/i,
+                    Mobile: /(iphone|ipod|((?:android)?.*?mobile)|blackberry|nokia)/i
+                },
+                architecture: {
+                    x64: /(?:(amd|x(?:(?:86|64)[_-])?|wow|win)64)[;\)]/i,
+                    x32: /((?:i[346]|x)86)[;\)]/i,
+                    //ARM: //i
                 }
             },
             agent = agent || parseUA();
@@ -74,7 +79,9 @@
             ua.os = parseOS();
             ua.browser = parseBrowser();
             ua.version = parseVersion(ua.browser);
+            ua.engine = parseEngine();
             ua.device = parseDevice();
+            ua.architecture = parseArchitecture();
             
             return ua;
         }
@@ -95,6 +102,19 @@
             return parseProperty('browser');
         }
 
+        function parseDevice() {
+            var device = parseProperty('device');
+            return device || 'Desktop';
+        }
+
+        function parseEngine() {
+            return parseProperty('engine');    
+        }
+
+        function parseArchitecture() {
+            return parseProperty('architecture');
+        }
+
         function parseVersion(browser) {
             var version, parts = [];
 
@@ -111,10 +131,6 @@
                 full: version,
                 major: parseInt(parts[0]),
             }
-        }
-
-        function parseDevice() {
-            return parseProperty('device');
         }
 
         /* getters */
@@ -139,23 +155,36 @@
             return getProperty('device');
         }
 
+        function getEngine() {
+            return getProperty('engine');    
+        }
 
-/*
-        function isIE() {
-            return checkBrowser(masks.browser.ie);
+        function getArchitecture() {
+            return getProperty('architecture');    
+        }
+
+        function checkBrowserWithVersion(browser, version) {
+            if (getBrowser() === browser) {
+                return version === undefined ? true : getVersion().major === version;
+            } 
+            return false;
+        }
+
+        function isIE(version) {
+            return checkBrowserWithVersion('Internet Explorer', version);
         }
         
-        function isSafari() {
-            return checkBrowser(masks.browser.safari);
+        function isSafari(version) {
+            return checkBrowserWithVersion('Safari', version);
         }
         
-        function isChrome() {
-            return checkBrowser(masks.browser.chrome);
+        function isChrome(version) {
+            return checkBrowserWithVersion('Chrome', version);
         }
         
-        function isOpera() {
-            return checkBrowser(masks.browser.opera) || checkBrowser(masks.browser.opera12);
-        }*/
+        function isOpera(version) {
+            return checkBrowserWithVersion('Opera', version);
+        }
 
         function getUserAgent() {
             return userAgent;
@@ -182,10 +211,12 @@
             getVersion: getVersion,
             getOS: getOS,
             getDevice: getDevice,
-            /*isIE: isIE,
+            getEngine: getEngine,
+            getArchitecture: getArchitecture,
+            isIE: isIE,
             isSafari: isSafari,
             isChrome: isChrome,
-            isOpera: isOpera*/
+            isOpera: isOpera
         }
     }
 
