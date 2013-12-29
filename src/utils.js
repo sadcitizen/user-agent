@@ -1,4 +1,4 @@
-(function (windows) {
+(function (window) {
     'use strict';
 
     var Logger = function() {
@@ -26,7 +26,7 @@
     };
 
     var Browser = function() {
-        var userAgent = (windows.navigator && windows.navigator.userAgent) || '',
+        var userAgent = (window.navigator && window.navigator.userAgent) || '',
             defaults = {
                 browser: null,
                 engine: null,
@@ -227,5 +227,6 @@
         }
     };
 
-    windows.Utils = new Utils();
+    window.Utils = new Utils();
+
 })(this);
