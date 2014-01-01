@@ -30,7 +30,7 @@
                 },
                 os: {
                     Windows: /windows/i,
-                    Linux: /linux/i,
+                    Linux: /linux(?!.*android)/i,
                     iOS: /(ipad|iphone|ipod)/i,
                     Mac: /macintosh/i,
                     Android: /android/i
