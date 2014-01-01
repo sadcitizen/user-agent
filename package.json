@@ -1,5 +1,5 @@
 {
-  "name": "iop-utilities-library",
+  "name": "user-agent-lib",
   "version": "0.0.1",
   "devDependencies": {
     "grunt": "~0.4.2",

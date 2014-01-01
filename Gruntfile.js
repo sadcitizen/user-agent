@@ -8,14 +8,14 @@ module.exports = function(grunt) {
                 src: [
                     'src/*.js'
                 ],
-                dest: 'build/lib.js'
+                dest: 'build/ua.js'
             }
         },
 
         uglify: {
             build: {
-                src: 'build/lib.js',
-                dest: 'build/lib.min.js'
+                src: 'build/ua.js',
+                dest: 'build/ua.min.js'
             }
         },
 

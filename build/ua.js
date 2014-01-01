@@ -1,31 +1,7 @@
 (function (window) {
     'use strict';
 
-    var Logger = function() {
-
-        function leadingZero(value) {
-            return (value < 10 ? '0' : '') + value;
-        }
-
-        function getNowDateTime() {
-            var date = new Date();
-            return leadingZero(date.getHours()) + ':' +
-                leadingZero(date.getMinutes()) + ':' +
-                leadingZero(date.getSeconds()) + '.' + date.getMilliseconds();
-        }
-
-        function log(msg) {
-            if (arguments.length) {
-                console.log(getNowDateTime() + ' => ' + msg);
-            }
-        }
-
-        return {
-            log: log
-        }
-    };
-
-    var Browser = function() {
+    var UA = function() {
         var userAgent = (window.navigator && window.navigator.userAgent) || '',
             defaults = {
                 browser: null,
@@ -220,13 +196,6 @@
         }
     }
 
-    var Utils = function () {
-        return {
-            logger: Logger,
-            browser: Browser
-        }
-    };
-
-    window.Utils = new Utils();
+    window._ua = new UA();
 
 })(this);

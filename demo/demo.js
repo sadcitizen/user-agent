@@ -4,15 +4,13 @@
 		document.getElementById(el).innerText = value;
 	}
 	
-	var browser = Utils.browser();
-
-	insert('user-agent', browser.getUserAgent());
-	insert('screen-resolution', browser.getResolution().size);
-	insert('browser', browser.getBrowser());
-	insert('version', 'full: ' + browser.getVersion().full + ' | major: ' + browser.getVersion().major);
-	insert('engine', browser.getEngine());
-	insert('device', browser.getDevice());
-	insert('os', browser.getOS());
-	insert('architecture', browser.getArchitecture());
+	insert('user-agent', _ua.getUserAgent());
+	insert('screen-resolution', _ua.getResolution().size);
+	insert('browser', _ua.getBrowser());
+	insert('version', 'full: ' + _ua.getVersion().full + ' | major: ' + _ua.getVersion().major);
+	insert('engine', _ua.getEngine());
+	insert('device', _ua.getDevice());
+	insert('os', _ua.getOS());
+	insert('architecture', _ua.getArchitecture());
 
 })(this, document);
