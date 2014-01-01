@@ -33,7 +33,10 @@
                     Linux: /linux(?!.*android)/i,
                     iOS: /(ipad|iphone|ipod)/i,
                     Mac: /macintosh/i,
-                    Android: /android/i
+                    Android: /android/i,
+                    MeeGo: /meego/i,
+                    BlackBerry: /(blackberry|rim|bb)/i
+
                 },
                 device: {
                     Tablet: /(ipad|android(?!.*mobile))/i,
